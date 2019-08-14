@@ -4,6 +4,7 @@ import { PlayAgainButton } from './components/PlayAgainButton/PlayAgainButton';
 import { IPlayer } from './components/Player/Player';
 import { PlayerList } from './components/PlayerList/PlayerList';
 
+export type SetPairsFn = (name: IPlayer['name'], pairs: IPlayer['pairs']) => void;
 export type Winner = IPlayer['name'] | null;
 
 export interface IAppState {
@@ -31,10 +32,12 @@ export class App extends PureComponent<{}, IAppState> {
         {
           name: 'Player 1',
           hand: [],
+          pairs: null,
         },
         {
           name: 'Player 2',
           hand: [],
+          pairs: null,
         },
       ],
       winner: null,
@@ -49,12 +52,27 @@ export class App extends PureComponent<{}, IAppState> {
     this.makeHands();
   };
 
+  setPairs: SetPairsFn = (name, pairs) => {
+    this.setState(({ players }) => ({
+      players: players.map((player) => {
+        if (player.name === name) {
+          return {
+            ...player,
+            pairs,
+          };
+        }
+
+        return player;
+      }),
+    }));
+  };
+
   render() {
     const { players, winner } = this.state;
 
     return (
       <div className="app">
-        <PlayerList players={ players } winner={ winner } />
+        <PlayerList players={ players } winner={ winner } onSetPairs={ this.setPairs } />
         <PlayAgainButton onClick={ this.playAgain } />
       </div>
     );
@@ -82,6 +100,7 @@ export class App extends PureComponent<{}, IAppState> {
       return {
         ...player,
         hand,
+        pairs: null,
       };
     });
 
