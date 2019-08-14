@@ -34,7 +34,7 @@ const getPairs = (cards: CountedCards): string[] => {
 
 export const Player: FC<IPlayerProps> = ({ name, hand, winner, pairs, onSetPairs }) => {
   useEffect(() => {
-    if (!pairs) {
+    if (!pairs && hand.length) {
       const countedCards = countCards(hand);
       onSetPairs(name, getPairs(countedCards));
     }

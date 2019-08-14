@@ -8,8 +8,7 @@ export type SetPairsFn = (name: IPlayer['name'], pairs: IPlayer['pairs']) => voi
 export type Winner = IPlayer['name'] | null;
 
 export interface IAppState {
-  allCards: string[];
-  availableCards: string[];
+  cards: string[];
   players: IPlayer[];
   winner: Winner;
 }
@@ -23,11 +22,8 @@ export class App extends PureComponent<{}, IAppState> {
   constructor(props: Readonly<{}>) {
     super(props);
 
-    const allCards = this.parseCards();
-
     this.state = {
-      allCards,
-      availableCards: allCards,
+      cards: this.parseCards(),
       players: [
         {
           name: 'Player 1',
@@ -53,8 +49,8 @@ export class App extends PureComponent<{}, IAppState> {
   };
 
   setPairs: SetPairsFn = (name, pairs) => {
-    this.setState(({ players }) => ({
-      players: players.map((player) => {
+    this.setState((state) => {
+      const players = state.players.map((player) => {
         if (player.name === name) {
           return {
             ...player,
@@ -63,8 +59,23 @@ export class App extends PureComponent<{}, IAppState> {
         }
 
         return player;
-      }),
-    }));
+      });
+
+      let winner: Winner = null;
+
+      if (this.getPairsCount(players[0].pairs) > this.getPairsCount(players[1].pairs)) {
+        winner = players[0].name;
+      }
+
+      if (this.getPairsCount(players[1].pairs) > this.getPairsCount(players[0].pairs)) {
+        winner = players[1].name;
+      }
+
+      return {
+        players,
+        winner,
+      };
+    });
   };
 
   render() {
@@ -78,8 +89,8 @@ export class App extends PureComponent<{}, IAppState> {
     );
   }
 
-  private parseCards = (): IAppState['allCards'] => {
-    const allCards: IAppState['allCards'] = [];
+  private parseCards = (): IAppState['cards'] => {
+    const allCards: IAppState['cards'] = [];
 
     App.SUITS.forEach((suit) => {
       App.CARDS.forEach((card) => {
@@ -91,7 +102,7 @@ export class App extends PureComponent<{}, IAppState> {
   };
 
   private makeHands = (): void => {
-    let availableCards = this.state.availableCards;
+    let availableCards = this.state.cards;
 
     const playersWithHand = this.state.players.map((player) => {
       const [hand, cardsLeft] = this.makeHand(availableCards);
@@ -106,11 +117,11 @@ export class App extends PureComponent<{}, IAppState> {
 
     this.setState(() => ({
       players: playersWithHand,
-      availableCards,
+      winner: null,
     }));
   };
 
-  private makeHand = (availableCards: IAppState['availableCards']): [IPlayer['hand'], IAppState['availableCards']] => {
+  private makeHand = (availableCards: IAppState['cards']): [IPlayer['hand'], IAppState['cards']] => {
     let cardsLeft = availableCards;
     const hand: IPlayer['hand'] = [];
 
@@ -123,7 +134,7 @@ export class App extends PureComponent<{}, IAppState> {
     return [hand, cardsLeft];
   };
 
-  private getRandomCard = (availableCards: IAppState['availableCards']): [IAppState['availableCards'][0], number] => {
+  private getRandomCard = (availableCards: IAppState['cards']): [IAppState['cards'][0], number] => {
     const randomIndex = this.getRandomInt(0, availableCards.length);
 
     return [availableCards[randomIndex], randomIndex];
@@ -131,6 +142,10 @@ export class App extends PureComponent<{}, IAppState> {
 
   private getRandomInt = (min: number, max: number) => {
     return Math.floor(Math.random() * (max - min)) + min;
+  };
+
+  private getPairsCount = (pairs: IPlayer['pairs']): number => {
+    return pairs ? pairs.length : 0;
   };
 
 }
