@@ -1,0 +1,14 @@
+.card {
+  height: 125px;
+  width: 100px;
+
+  &.pair0 {
+    border-top: 3px solid #f33;
+    padding: 0.25em 0 0.75em;
+  }
+
+  &.pair1 {
+    border-top: 3px solid #33f;
+    padding: 0.25em 0 0.75em;
+  }
+}
