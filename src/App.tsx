@@ -41,13 +41,17 @@ export class App extends PureComponent<{}, AppState> {
     this.makeHands();
   }
 
+  playAgain = () => {
+    this.makeHands();
+  };
+
   render() {
     const { players } = this.state;
 
     return (
       <div className="app">
         <PlayerList players={ players } />
-        <PlayAgainButton />
+        <PlayAgainButton onClick={ this.playAgain } />
       </div>
     );
   }
