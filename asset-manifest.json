@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/static/css/main.18bcc16a.chunk.css",
-    "main.js": "/static/js/main.fbd559f0.chunk.js",
-    "main.js.map": "/static/js/main.fbd559f0.chunk.js.map",
-    "runtime~main.js": "/static/js/runtime~main.f1eccd4e.js",
-    "runtime~main.js.map": "/static/js/runtime~main.f1eccd4e.js.map",
-    "static/js/2.db49b10a.chunk.js": "/static/js/2.db49b10a.chunk.js",
-    "static/js/2.db49b10a.chunk.js.map": "/static/js/2.db49b10a.chunk.js.map",
-    "index.html": "/index.html",
-    "precache-manifest.ebd8294328b2c602bdc325e29306a52c.js": "/precache-manifest.ebd8294328b2c602bdc325e29306a52c.js",
-    "service-worker.js": "/service-worker.js",
-    "static/css/main.18bcc16a.chunk.css.map": "/static/css/main.18bcc16a.chunk.css.map"
+    "main.css": "/wildfire-pairs/static/css/main.18bcc16a.chunk.css",
+    "main.js": "/wildfire-pairs/static/js/main.3355117e.chunk.js",
+    "main.js.map": "/wildfire-pairs/static/js/main.3355117e.chunk.js.map",
+    "runtime~main.js": "/wildfire-pairs/static/js/runtime~main.22208aa3.js",
+    "runtime~main.js.map": "/wildfire-pairs/static/js/runtime~main.22208aa3.js.map",
+    "static/js/2.db49b10a.chunk.js": "/wildfire-pairs/static/js/2.db49b10a.chunk.js",
+    "static/js/2.db49b10a.chunk.js.map": "/wildfire-pairs/static/js/2.db49b10a.chunk.js.map",
+    "index.html": "/wildfire-pairs/index.html",
+    "precache-manifest.7623cd6ea8c787a89281a86ddd1c9171.js": "/wildfire-pairs/precache-manifest.7623cd6ea8c787a89281a86ddd1c9171.js",
+    "service-worker.js": "/wildfire-pairs/service-worker.js",
+    "static/css/main.18bcc16a.chunk.css.map": "/wildfire-pairs/static/css/main.18bcc16a.chunk.css.map"
   }
 }
